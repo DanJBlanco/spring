@@ -17,5 +17,28 @@
 
 <span th:if="${user.email}" th:text="${user.email}"></span><br>
 <span th:if="${user.email == null}" th:text="'email not found'"></span>
+
+<h1>User List: </h1>
+<div th:if="${userList.isEmpty()}">Users List Empty!!!</div>
+
+<table th:if="${!userList.isEmpty()}">
+     <thead>
+        <tr>
+            <th>Name</th>
+            <th>Lastname</th>
+            <th>Email</th>
+        </tr>
+     </thead>
+
+    <tbody>
+    <tr th:each="user: ${userList}">
+        <td th:text="${user.name}"> </td>
+        <td th:text="${user.lastName}"> </td>
+        <td th:text="${user.email}"> </td>
+
+    </tr>
+    </tbody>
+</table>
+
 </body>
 </html>
