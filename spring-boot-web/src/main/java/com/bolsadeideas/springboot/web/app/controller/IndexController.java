@@ -37,6 +37,7 @@ public class IndexController {
         mv.addAttribute("user", user);
 
       return "profile";
+
     }
 
 }
