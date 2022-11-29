@@ -13,7 +13,7 @@ public class IndexController {
 //    // without dependency injection
 //    private MyService service = new MyService();
     @Autowired
-    @Qualifier("oracleService")
+    @Qualifier("mySimpleService")
     private IService service;
 
     @GetMapping({"/", "", "/index"})
