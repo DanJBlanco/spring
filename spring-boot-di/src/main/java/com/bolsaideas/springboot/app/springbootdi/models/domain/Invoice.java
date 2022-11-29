@@ -18,5 +18,5 @@ public class Invoice {
     private Client client;
 
     @Autowired
-    private List<ItemInvoice> itemInvoices;
+    private List<ItemInvoice> items;
 }

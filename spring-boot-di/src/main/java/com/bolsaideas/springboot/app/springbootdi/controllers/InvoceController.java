@@ -14,7 +14,7 @@ public class InvoceController {
     @Autowired
     private Invoice invoice;
 
-    @GetMapping("/")
+    @GetMapping({"/", ""})
     public String getInvoice(Model model){
 
         model.addAttribute("invoice", this.invoice);
