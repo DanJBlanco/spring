@@ -6,21 +6,24 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Objects;
+import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.bind.support.SessionStatus;
 
 @Controller
+@SessionAttributes("user")
 public class FormController {
 
     @GetMapping("/form")
     public String form(Model model){
+
+        User user = new User();
+        user.setName("name test");
+        user.setLastName("Last name test");
+        user.setIdentify("23-L");
+
         model.addAttribute("title", "User Form");
-        model.addAttribute("user", new User());
+        model.addAttribute("user", user);
         return "index";
     }
 
@@ -28,7 +31,8 @@ public class FormController {
     public String processForm(
 //            @Valid @ModelAttribute("userInput") User user,
             @Valid User user,
-            BindingResult result, Model model
+            BindingResult result, Model model,
+            SessionStatus status
 //            ,
 //                              @RequestParam String username,
 //                              @RequestParam String password,
@@ -57,7 +61,7 @@ public class FormController {
 
         model.addAttribute("title", "Form result");
         model.addAttribute("userModel", user);
-
+        status.setComplete();
         return "result";
     }
 

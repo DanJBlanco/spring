@@ -9,6 +9,26 @@
 
 <form th:action="@{/form}" th:object="${user}" method="post">
     <div>
+        <label for="name">Name</label>
+        <div>
+            <!--            <input type="text" name="username" id="username" th:value="${userInput?.username}">-->
+            <input type="text" id="name" th:field="*{name}">
+        </div>
+        <div th:if="${#fields.hasErrors('name')}">
+            <p th:errors="*{name}"></p>
+        </div>
+    </div>
+    <div>
+        <label for="lastName">Last Name</label>
+        <div>
+            <!--            <input type="text" name="username" id="username" th:value="${userInput?.username}">-->
+            <input type="text" id="lastName" th:field="*{lastName}">
+        </div>
+        <div th:if="${#fields.hasErrors('lastName')}">
+            <p th:errors="*{lastName}"></p>
+        </div>
+    </div>
+    <div>
         <label for="username">Username</label>
         <div>
 <!--            <input type="text" name="username" id="username" th:value="${userInput?.username}">-->

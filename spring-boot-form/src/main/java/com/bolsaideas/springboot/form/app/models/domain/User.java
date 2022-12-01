@@ -12,6 +12,8 @@ import lombok.NoArgsConstructor;
 @Builder
 public class User {
 
+    private String identify;
+
     @NotEmpty
     private String username;
 
@@ -20,4 +22,10 @@ public class User {
 
     @NotEmpty
     private String email;
+
+    @NotEmpty
+    private String name;
+
+    @NotEmpty
+    private String lastName;
 }
