@@ -47,10 +47,12 @@ public class FormController {
 
         // check validations
         if (result.hasErrors() ){
-            Map<String, String> errors = new HashMap<>();
-            result.getFieldErrors().forEach( fieldError -> errors.put(fieldError.getField(), "Field ".concat(fieldError.getField()).concat(" ").concat(Objects.requireNonNull(fieldError.getDefaultMessage()))));
-            model.addAttribute("errors", errors);
+//            Map<String, String> errors = new HashMap<>();
+//            result.getFieldErrors().forEach( fieldError -> errors.put(fieldError.getField(), "Field ".concat(fieldError.getField()).concat(" ").concat(Objects.requireNonNull(fieldError.getDefaultMessage()))));
+//            model.addAttribute("errors", errors);
             return "index";
+
+
         }
 
         model.addAttribute("title", "Form result");

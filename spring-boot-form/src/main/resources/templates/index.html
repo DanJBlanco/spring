@@ -14,18 +14,18 @@
 <!--            <input type="text" name="username" id="username" th:value="${userInput?.username}">-->
             <input type="text" id="username" th:field="*{username}">
         </div>
-        <div th:if="${ errors != null && errors.containsKey('username')}">
-            <p th:text="${errors.get('username')}"></p>
+        <div th:if="${#fields.hasErrors('username')}">
+            <p th:errors="*{username}"></p>
         </div>
     </div>
     <div>
         <label for="password">Password</label>
         <div>
-            <input type="password" name="password" id="password">
+            <input type="password" th:field="*{password}" id="password">
         </div>
 
-        <div th:if="${ errors != null && errors.containsKey('password')}">
-            <p th:text="${errors.get('password')}"></p>
+        <div th:if="${#fields.hasErrors('password')}">
+            <p th:errors="*{password}"></p>
         </div>
     </div>
 
@@ -36,8 +36,8 @@
             <input type="text" id="email" th:field="*{email}">
         </div>
 
-        <div th:if="${ errors != null && errors.containsKey('email')}">
-            <p th:text="${errors.get('email')}"></p>
+        <div th:if="${#fields.hasErrors('email')}">
+            <p th:errors="*{email}"></p>
         </div>
     </div>
 
