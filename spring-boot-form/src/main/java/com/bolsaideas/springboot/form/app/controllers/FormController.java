@@ -1,7 +1,9 @@
 package com.bolsaideas.springboot.form.app.controllers;
 
 import com.bolsaideas.springboot.form.app.models.domain.User;
+import com.bolsaideas.springboot.form.app.validation.UserValidator;
 import jakarta.validation.Valid;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -13,6 +15,9 @@ import org.springframework.web.bind.support.SessionStatus;
 @Controller
 @SessionAttributes("user")
 public class FormController {
+
+    @Autowired
+    UserValidator userValidator;
 
     @GetMapping("/form")
     public String form(Model model){
@@ -50,6 +55,9 @@ public class FormController {
 //                .build();
 
         // check validations
+
+        userValidator.validate(user, result);
+
         if (result.hasErrors() ){
 //            Map<String, String> errors = new HashMap<>();
 //            result.getFieldErrors().forEach( fieldError -> errors.put(fieldError.getField(), "Field ".concat(fieldError.getField()).concat(" ").concat(Objects.requireNonNull(fieldError.getDefaultMessage()))));
