@@ -13,7 +13,7 @@
         <label for="birthDate">Birth Date</label>
         <div>
             <!--            <input type="text" name="username" id="username" th:value="${userInput?.username}">-->
-            <input type="text" id="birthDate" th:field="*{birthDate}">
+            <input type="date" id="birthDate" th:field="*{birthDate}">
         </div>
         <div th:if="${#fields.hasErrors('birthDate')}">
             <p th:errors="*{birthDate}"></p>

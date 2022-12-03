@@ -9,10 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.InitBinder;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.support.SessionStatus;
 
 import java.text.SimpleDateFormat;
@@ -57,8 +54,8 @@ public class FormController {
     public String processForm(
 //            @Valid @ModelAttribute("userInput") User user,
             @Valid User user,
-            BindingResult result, Model model,
-            SessionStatus status
+            BindingResult result,
+            Model model
 //            ,
 //                              @RequestParam String username,
 //                              @RequestParam String password,
@@ -80,7 +77,9 @@ public class FormController {
         // userValidator.validate(user, result);
 
         if (result.hasErrors() ){
-//            Map<String, String> errors = new HashMap<>();
+            model.addAttribute("title", "Form error");
+
+            //            Map<String, String> errors = new HashMap<>();
 //            result.getFieldErrors().forEach( fieldError -> errors.put(fieldError.getField(), "Field ".concat(fieldError.getField()).concat(" ").concat(Objects.requireNonNull(fieldError.getDefaultMessage()))));
 //            model.addAttribute("errors", errors);
             return "index";
@@ -88,8 +87,13 @@ public class FormController {
 
         }
 
+        return "redirect:/user";
+    }
+
+    @GetMapping("/user")
+    public String getUser(@SessionAttribute("user") User user, Model model, SessionStatus status){
+
         model.addAttribute("title", "Form result");
-        model.addAttribute("userModel", user);
         status.setComplete();
         return "result";
     }
