@@ -15,6 +15,7 @@ public class UserValidator implements Validator {
     public void validate(Object target, Errors errors) {
         User user = (User) target;
         ValidationUtils.rejectIfEmpty(errors, "name", "Properties error, name have not be empty");
+        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "name", "Properties error, name have not be empty");
 
         if (!user.getIdentify().matches("REGEX")){
             errors.rejectValue("identify", "identify must be like fallowing patterns");
