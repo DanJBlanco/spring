@@ -14,6 +14,7 @@ import org.springframework.web.bind.support.SessionStatus;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Objects;
 
 @Controller
 @SessionAttributes("user")
@@ -91,8 +92,11 @@ public class FormController {
     }
 
     @GetMapping("/user")
-    public String getUser(@SessionAttribute("user") User user, Model model, SessionStatus status){
+    public String getUser(@SessionAttribute(value = "user", required = false) User user, Model model, SessionStatus status){
 
+        if(Objects.isNull(user)){
+            return "redirect:/form";
+        }
         model.addAttribute("title", "Form result");
         status.setComplete();
         return "result";
