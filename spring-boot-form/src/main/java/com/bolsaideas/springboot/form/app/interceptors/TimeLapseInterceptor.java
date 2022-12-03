@@ -5,6 +5,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
+import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -18,6 +19,10 @@ public class TimeLapseInterceptor implements HandlerInterceptor {
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
+
+        if( handler instanceof HandlerMethod){
+            LOGGER.info("Controller Method: {}", ((HandlerMethod) handler).getMethod().getName());
+        }
 
         LOGGER.info("TimeLapseInterceptor: preHandle() in ...");
         long initTime = System.currentTimeMillis();
