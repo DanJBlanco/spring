@@ -36,7 +36,9 @@ public class FormController {
         user.setName("name test");
         user.setLastName("Last name test");
         user.setIdentify("23-L");
-
+        user.setUsername("usernameTest");
+        user.setPassword("passwordTest");
+        user.setEmail("Emailtest@test.com");
         model.addAttribute("title", "User Form");
         model.addAttribute("user", user);
         return "index";

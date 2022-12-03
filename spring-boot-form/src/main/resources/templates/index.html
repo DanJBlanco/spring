@@ -8,6 +8,18 @@
 <h2 th:text="${title}"></h2>
 
 <form th:action="@{/form}" th:object="${user}" method="post">
+
+    <div>
+        <label for="birthDate">Birth Date</label>
+        <div>
+            <!--            <input type="text" name="username" id="username" th:value="${userInput?.username}">-->
+            <input type="text" id="birthDate" th:field="*{birthDate}">
+        </div>
+        <div th:if="${#fields.hasErrors('birthDate')}">
+            <p th:errors="*{birthDate}"></p>
+        </div>
+    </div>
+
     <div>
         <label for="name">Name</label>
         <div>
@@ -41,7 +53,7 @@
     <div>
         <label for="password">Password</label>
         <div>
-            <input type="password" th:field="*{password}" id="password">
+            <input type="text" th:field="*{password}" id="password">
         </div>
 
         <div th:if="${#fields.hasErrors('password')}">
