@@ -25,7 +25,7 @@ public class FormController {
     public void initBinder(WebDataBinder binder){
 
         // set validator to TAG @Valid
-        binder.setValidator(userValidator);
+        binder.addValidators(userValidator);
 
     }
 
