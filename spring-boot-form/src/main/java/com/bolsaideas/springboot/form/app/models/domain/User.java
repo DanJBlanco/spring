@@ -1,5 +1,6 @@
 package com.bolsaideas.springboot.form.app.models.domain;
 
+import com.bolsaideas.springboot.form.app.validation.IdentifiationRegexAnnotation;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Size;
@@ -14,6 +15,7 @@ import lombok.NoArgsConstructor;
 @Builder
 public class User {
 
+    @IdentifiationRegexAnnotation
     private String identify;
 
     @NotEmpty
