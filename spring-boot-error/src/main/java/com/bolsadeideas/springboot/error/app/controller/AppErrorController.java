@@ -9,6 +9,11 @@ public class AppErrorController {
 
     @GetMapping({"/index","/",""})
     public String index(){
+
+        int val = 100/0;
+
         return "index";
     }
+
+
 }
