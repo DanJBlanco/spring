@@ -15,22 +15,26 @@
     <hr>
     <div class="row justify-content-center">
             <form class="col-6" th:action="@{/form}" th:object="${client}" method="post">
-                <div class="mb-3">
+                <div class="mb-3 form-group">
                     <label for="firstName" class="form-label">First Name</label>
-                    <input type="text" class="form-control" id="firstName" th:field="*{firstName}"/>
+                    <input type="text" class="form-control" id="firstName" th:field="*{firstName}" th:errorclass="'form-control alert-danger'"/>
+                    <small class="form-text text-danger" th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}"> </small>
                 </div>
-                <div class="mb-3">
+                <div class="mb-3 form-group">
                     <label for="lastName" class="form-label">Last Name</label>
-                    <input type="text" class="form-control" id="lastName" th:field="*{lastName}"/>
+                    <input type="text" class="form-control" id="lastName" th:field="*{lastName}" th:errorclass="'form-control alert-danger'"/>
+                    <small class="form-text text-danger" th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}"> </small>
                 </div>
-                <div class="mb-3">
+                <div class="mb-3 form-group">
                     <label for="email" class="form-label">Email address</label>
-                    <input type="email" class="form-control" id="email" aria-describedby="emailHelper" th:field="*{email}"/>
+                    <input type="text" class="form-control" id="email" aria-describedby="emailHelper" th:field="*{email}" th:errorclass="'form-control alert-danger'"/>
                     <div id="emailHelper" class="form-text">We'll never share your email with anyone else.</div>
+                    <small class="form-text text-danger" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"> </small>
                 </div>
-                <div class="mb-3">
+                <div class="mb-3 form-group">
                     <label for="createAt" class="form-label">Create</label>
                     <input type="date" class="form-control" id="createAt" th:field="*{createAt}"/>
+                    <small class="form-text text-danger" th:if="${#fields.hasErrors('createAt')}" th:errors="*{createAt}"> </small>
                 </div>
                 <button type="submit" class="btn btn-primary">Submit</button>
 
