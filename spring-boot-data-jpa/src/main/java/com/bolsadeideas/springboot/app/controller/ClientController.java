@@ -11,10 +11,13 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.bind.support.SessionStatus;
 
 import java.util.Map;
 
 @Controller
+@SessionAttributes("client")
 public class ClientController {
 
     private final IClientDao clientDao;
@@ -60,7 +63,7 @@ public class ClientController {
     }
 
     @PostMapping("/form")
-    public String save(@Valid Client client, BindingResult result, Model model){
+    public String save(@Valid Client client, BindingResult result, Model model, SessionStatus status){
 
         if(result.hasErrors()){
 
@@ -69,7 +72,7 @@ public class ClientController {
         }
 
         clientDao.save(client);
-
+        status.setComplete();
         return "redirect:/list";
     }
 
