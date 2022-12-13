@@ -20,6 +20,8 @@
             <th scope="col">Last name</th>
             <th scope="col">Email</th>
             <th scope="col">create at</th>
+            <th scope="col"></th>
+            <th scope="col"></th>
         </tr>
         </thead>
 
@@ -31,6 +33,7 @@
             <td th:text="${client.getEmail()}"></td>
             <td th:text="${client.getCreateAt()}"></td>
             <td><a class="btn btn-primary btn-xs" th:href="@{/form/} + ${client.getId()}">Edit</a></td>
+            <td><a class="btn btn-danger btn-xs" th:href="@{/delete/} + ${client.getId()}" onclick="return confirm('Are you suer?');">delete</a></td>
         </tr>
         </tbody>
     </table>

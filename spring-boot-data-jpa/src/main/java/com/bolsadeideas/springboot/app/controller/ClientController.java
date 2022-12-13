@@ -8,10 +8,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.support.SessionStatus;
 
 import java.util.Map;
@@ -73,6 +70,14 @@ public class ClientController {
 
         clientDao.save(client);
         status.setComplete();
+        return "redirect:/list";
+    }
+
+    @GetMapping("/delete/{id}")
+    public String delete(@PathVariable(value = "id") Long id) {
+        if( id > 0) {
+            clientDao.delete(id);
+        }
         return "redirect:/list";
     }
 
