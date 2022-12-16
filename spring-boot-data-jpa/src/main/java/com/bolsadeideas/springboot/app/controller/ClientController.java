@@ -1,14 +1,16 @@
 package com.bolsadeideas.springboot.app.controller;
 
-import com.bolsadeideas.springboot.app.models.dao.IClientDao;
 import com.bolsadeideas.springboot.app.models.entity.Client;
+import com.bolsadeideas.springboot.app.models.service.IClientService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 
 import java.util.Map;
@@ -17,17 +19,17 @@ import java.util.Map;
 @SessionAttributes("client")
 public class ClientController {
 
-    private final IClientDao clientDao;
+    private final IClientService clientService;
 
     @Autowired
-    public ClientController(@Qualifier("clientDaoH2") IClientDao clientDao) {
-        this.clientDao = clientDao;
+    public ClientController(IClientService iClientService) {
+        this.clientService = iClientService;
     }
 
     @GetMapping("/list")
     public String list(Model model){
 
-        model.addAttribute("listClients", clientDao.findAll());
+        model.addAttribute("listClients", clientService.findAll());
         model.addAttribute("title", "Client's list");
         return "list";
     }
@@ -47,13 +49,13 @@ public class ClientController {
 
         Client client = null;
         if(id > 0) {
-            client = clientDao.findOne(id);
+            client = clientService.findOne(id);
         } else{
             return "redirect:/list";
         }
 
         model.put("client", client);
-        model.put("title", "Form for Client");
+        model.put("title", "Edit Client");
 
 
         return "form";
@@ -68,7 +70,7 @@ public class ClientController {
             return "form";
         }
 
-        clientDao.save(client);
+        clientService.save(client);
         status.setComplete();
         return "redirect:/list";
     }
@@ -76,7 +78,7 @@ public class ClientController {
     @GetMapping("/delete/{id}")
     public String delete(@PathVariable(value = "id") Long id) {
         if( id > 0) {
-            clientDao.delete(id);
+            clientService.delete(id);
         }
         return "redirect:/list";
     }
