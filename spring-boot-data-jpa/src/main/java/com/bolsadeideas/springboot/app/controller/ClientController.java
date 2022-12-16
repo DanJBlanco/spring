@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.Map;
 
@@ -62,23 +63,25 @@ public class ClientController {
     }
 
     @PostMapping("/form")
-    public String save(@Valid Client client, BindingResult result, Model model, SessionStatus status){
+    public String save(@Valid Client client, BindingResult result, Model model, RedirectAttributes flash, SessionStatus status){
 
         if(result.hasErrors()){
-
             model.addAttribute("title", "Client's Formit ");
             return "form";
         }
 
+        String msg = (client.getId() != null) ? "Client edit successfully" : "Client create successfully";
         clientService.save(client);
         status.setComplete();
+        flash.addFlashAttribute("success", msg);
         return "redirect:/list";
     }
 
     @GetMapping("/delete/{id}")
-    public String delete(@PathVariable(value = "id") Long id) {
+    public String delete(@PathVariable(value = "id") Long id, RedirectAttributes flash) {
         if( id > 0) {
             clientService.delete(id);
+            flash.addFlashAttribute("success", "Cliente delete");
         }
         return "redirect:/list";
     }
